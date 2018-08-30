@@ -1,0 +1,101 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="AsyMonitor.MyScreenParam"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid x:Name="topGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40*"/>
+            <ColumnDefinition Width="60*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Content="屏幕IP地址"/>
+            <TextBox Grid.Row="0" Grid.Column="1" x:Name="ipAddr" Text="{Binding IpAddr}"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="通信端口"/>
+            <TextBox Grid.Row="1" Grid.Column="1" x:Name="ipPort" Text="{Binding Port}"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="屏号"/>
+            <!--<dxe:SpinEdit Grid.Row="2" Grid.Column="1" MinValue="1" MaxValue="65535" Increment="1" Value="{Binding Id}"/>-->
+            <xctk:ButtonSpinner Grid.Row="2" Grid.Column="1"  Spin="ButtonSpinner_Spin_Id">
+                <TextBox Text="{Binding Path=Id}" HorizontalContentAlignment="Right"/>
+            </xctk:ButtonSpinner>
+            <Label Grid.Row="3" Grid.Column="0" Content="屏幕宽度"/>
+            <!--<dxe:SpinEdit Grid.Row="3" Grid.Column="1" MinValue="64" MaxValue="2048" Increment="16" Value="{Binding Width}"/>-->
+            <xctk:ButtonSpinner Grid.Row="3" Grid.Column="1" Spin="ButtonSpinner_Spin_Width">
+                <TextBox Text="{Binding Path=Width}" HorizontalContentAlignment="Right"/>
+            </xctk:ButtonSpinner>
+            <Label Grid.Row="4" Grid.Column="0" Content="屏幕高度"/>
+            <!--<dxe:SpinEdit Grid.Row="4" Grid.Column="1" MinValue="16" MaxValue="512" Increment="16" Value="{Binding High}"/>-->
+            <xctk:ButtonSpinner Grid.Row="4" Grid.Column="1"  Spin="ButtonSpinner_Spin_High">
+                <TextBox Text="{Binding Path=High}" HorizontalContentAlignment="Right"/>
+            </xctk:ButtonSpinner>
+            <Label Grid.Row="5" Grid.Column="0" Content="屏类型"/>
+            <ComboBox Grid.Row="5" Grid.Column="1" SelectedIndex="{Binding Type}">
+                <ComboBoxItem Content="单基色"/>
+                <ComboBoxItem Content="双基色"/>
+            </ComboBox>
+            <Label Grid.Row="6" Grid.Column="0" Content="数据极性"/>
+            <ComboBox Grid.Row="6" Grid.Column="1" SelectedIndex="{Binding Polarity}">
+                <ComboBoxItem Content="负极性"/>
+                <ComboBoxItem Content="正极性"/>
+            </ComboBox>
+            <Label Grid.Row="7" Grid.Column="0" Content="OE极性"/>
+            <ComboBox Grid.Row="7" Grid.Column="1" SelectedIndex="{Binding ValidType}">
+                <ComboBoxItem Content="低有效"/>
+                <ComboBoxItem Content="高有效"/>
+            </ComboBox>
+            <Label Grid.Row="8" Grid.Column="0" Content="总值班号"/>
+            <TextBox Grid.Row="8" Grid.Column="1" x:Name="dutyNo" Text="{Binding DutyNo}"/>
+            <Label Grid.Row="9" Grid.Column="0" Content="值班更新时间"/>
+            <xctk:DateTimeUpDown Name="timeCtrl" Grid.Row="9" Grid.Column="1" Text="{Binding UpdateTime, Mode=OneTime}" ValueChanged="timeCtrl_ValueChanged" Format="Custom" FormatString="hh:mm:ss" />
+            <!--<xctk:DateTimeUpDown Grid.Row="9" Grid.Column="1" Value="12:30:00" Format="Custom" FormatString="hh:mm:tt" />-->
+            <Label Grid.Row="10" Grid.Column="0" Content="通知翻屏（秒）"/>
+            <TextBox Grid.Row="10" Grid.Column="1" x:Name="convertTime" Text="{Binding NotifyTime}"/>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="70*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="60*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Content="主界面左标题"/>
+                <TextBox Grid.Row="0" Grid.Column="1" x:Name="leftTitle" Text="{Binding LeftTitle}"/>
+                <Label Grid.Row="1" Grid.Column="0" Content="主界面右标题"/>
+                <TextBox Grid.Row="1" Grid.Column="1" x:Name="rightTitle" Text="{Binding RightTitle}"/>
+                <Label Grid.Row="2" Grid.Column="0" Content="屏幕监控群"/>
+                <ComboBox Grid.Row="2" Grid.Column="1" x:Name="groupComboBox" DisplayMemberPath="GroupName" SelectedValuePath="AuthId" SelectedValue="{Binding GroupId}"/>
+            </Grid>
+            <GroupBox Grid.Row="1" Header="通知信息">
+                <TextBox  x:Name="noteText" Text="{Binding NoteText}"/>
+            </GroupBox>
+        </Grid>
+    </Grid>
+</UserControl>

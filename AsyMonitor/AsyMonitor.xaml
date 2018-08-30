@@ -1,0 +1,148 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:convert="clr-namespace:AsyMonitor.Converters"
+        x:Class="AsyMonitor.MainWindow"
+        mc:Ignorable="d"
+        Title="AsyMonitor" Height="678" Width="1171" Closing="Window_Close" Loaded="Window_Loaded">
+
+    <Window.Resources>
+        <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
+        <convert:ArgbToColorConverter x:Key="colorConvert"/>
+        <convert:StringToFontFamilyConverter x:Key="fontConvert"/>
+        <Style x:Key="GroupboxWithoutWhiteBorder" TargetType="{x:Type GroupBox}">
+            <Setter Property="BorderBrush" Value="#D5DFE5" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GroupBox}">
+                        <Grid SnapsToDevicePixels="true">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="6" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="6" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="6" />
+                            </Grid.RowDefinitions>
+                            <Border CornerRadius="4" Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="Transparent" Background="{TemplateBinding Background}" />
+                            <Border x:Name="Header" Padding="3,1,3,0" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1">
+                                <ContentPresenter ContentSource="Header" RecognizesAccessKey="true" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </Border>
+                            <ContentPresenter Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            <Border Grid.Row="1" Grid.RowSpan="3" Grid.ColumnSpan="4"  BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="3">
+                                <Border.OpacityMask>
+                                    <MultiBinding Converter="{StaticResource BorderGapMaskConverter}" ConverterParameter="7">
+                                        <Binding ElementName="Header" Path="ActualWidth" />
+                                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}" />
+                                        <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}" />
+                                    </MultiBinding>
+                                </Border.OpacityMask>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid  Background="Black" Name="mainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <GridSplitter Width="5" Grid.Column="0" Grid.RowSpan="2" Background="Red" HorizontalAlignment="Right"/>
+            <Grid Name="leftGrid" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Name="leftTitle" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding Path=LeftTitle}" FontFamily="{Binding Path=LeftTitleFontName, Converter={StaticResource fontConvert}}" Foreground="{Binding Path=LeftTitleFontColor, Converter={StaticResource colorConvert}}" FontSize="{Binding Path=LeftTitleFontSize}"/>
+                <Grid Grid.Row="1">
+                    <Grid Margin="20,10,10,10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Content="{Binding Path=RoleName1}" FontFamily="{Binding Path=LeftContextFontName, Converter={StaticResource fontConvert}}" Foreground="{Binding Path=LeftContextFontColor, Converter={StaticResource colorConvert}}" FontSize="{Binding Path=LeftContextFontSize}"/>
+                        <Label Grid.Row="0" Grid.Column="1" Content="{Binding Path=RoleTotal1Format}" FontFamily="{Binding Path=LeftContextFontName, Converter={StaticResource fontConvert}}" Foreground="{Binding Path=LeftContextFontColor, Converter={StaticResource colorConvert}}" FontSize="{Binding Path=LeftContextFontSize}"/>
+                        <Label Grid.Row="0" Grid.Column="2" Content="{Binding Path=RoleName2}" FontFamily="{Binding Path=LeftContextFontName, Converter={StaticResource fontConvert}}" Foreground="{Binding Path=LeftContextFontColor, Converter={StaticResource colorConvert}}" FontSize="{Binding Path=LeftContextFontSize}"/>
+                        <Label Grid.Row="0" Grid.Column="3" Content="{Binding Path=RoleTotal2Format}" FontFamily="{Binding Path=LeftContextFontName, Converter={StaticResource fontConvert}}" Foreground="{Binding Path=LeftContextFontColor, Converter={StaticResource colorConvert}}" FontSize="{Binding Path=LeftContextFontSize}"/>
+                        <Label Grid.Row="1" Grid.Column="0" Content="{Binding Path=RoleName3}" FontFamily="{Binding Path=LeftContextFontName, Converter={StaticResource fontConvert}}" Foreground="{Binding Path=LeftContextFontColor, Converter={StaticResource colorConvert}}" FontSize="{Binding Path=LeftContextFontSize}"/>
+                        <Label Grid.Row="1" Grid.Column="1" Content="{Binding Path=RoleTotal3Format}" FontFamily="{Binding Path=LeftContextFontName, Converter={StaticResource fontConvert}}" Foreground="{Binding Path=LeftContextFontColor, Converter={StaticResource colorConvert}}" FontSize="{Binding Path=LeftContextFontSize}"/>
+                        <Label Grid.Row="1" Grid.Column="2" Content="{Binding Path=RoleName4}" FontFamily="{Binding Path=LeftContextFontName, Converter={StaticResource fontConvert}}" Foreground="{Binding Path=LeftContextFontColor, Converter={StaticResource colorConvert}}" FontSize="{Binding Path=LeftContextFontSize}"/>
+                        <Label Grid.Row="1" Grid.Column="3" Content="{Binding Path=RoleTotal4Format}" FontFamily="{Binding Path=LeftContextFontName, Converter={StaticResource fontConvert}}" Foreground="{Binding Path=LeftContextFontColor, Converter={StaticResource colorConvert}}" FontSize="{Binding Path=LeftContextFontSize}"/>
+                        <Label Grid.Row="2" Grid.Column="0" Content="{Binding Path=RoleName5}" FontFamily="{Binding Path=LeftContextFontName, Converter={StaticResource fontConvert}}" Foreground="{Binding Path=LeftContextFontColor, Converter={StaticResource colorConvert}}" FontSize="{Binding Path=LeftContextFontSize}"/>
+                        <Label Grid.Row="2" Grid.Column="1" Content="{Binding Path=RoleTotal5Format}" FontFamily="{Binding Path=LeftContextFontName, Converter={StaticResource fontConvert}}" Foreground="{Binding Path=LeftContextFontColor, Converter={StaticResource colorConvert}}" FontSize="{Binding Path=LeftContextFontSize}"/>
+                        <Label Grid.Row="2" Grid.Column="2" Content="{Binding Path=RoleName6}"  FontFamily="{Binding Path=LeftContextFontName, Converter={StaticResource fontConvert}}" Foreground="{Binding Path=LeftContextFontColor, Converter={StaticResource colorConvert}}" FontSize="{Binding Path=LeftContextFontSize}"/>
+                        <Label Grid.Row="2" Grid.Column="3" Content="{Binding Path=RoleTotal6Format}" FontFamily="{Binding Path=LeftContextFontName, Converter={StaticResource fontConvert}}" Foreground="{Binding Path=LeftContextFontColor, Converter={StaticResource colorConvert}}" FontSize="{Binding Path=LeftContextFontSize}"/>
+                        <Label Grid.Row="3" Grid.Column="0" Content="{Binding Path=RoleName7}" FontFamily="{Binding Path=LeftContextFontName, Converter={StaticResource fontConvert}}" Foreground="{Binding Path=LeftContextFontColor, Converter={StaticResource colorConvert}}" FontSize="{Binding Path=LeftContextFontSize}"/>
+                        <Label Grid.Row="3" Grid.Column="1" Content="{Binding Path=RoleTotal7Format}" FontFamily="{Binding Path=LeftContextFontName, Converter={StaticResource fontConvert}}" Foreground="{Binding Path=LeftContextFontColor, Converter={StaticResource colorConvert}}" FontSize="{Binding Path=LeftContextFontSize}"/>
+                        <Label Grid.Row="3" Grid.Column="2" Content="{Binding Path=RoleName8}"  FontFamily="{Binding Path=LeftContextFontName, Converter={StaticResource fontConvert}}" Foreground="{Binding Path=LeftContextFontColor, Converter={StaticResource colorConvert}}" FontSize="{Binding Path=LeftContextFontSize}"/>
+                        <Label Grid.Row="3" Grid.Column="3" Content="{Binding Path=RoleTotal8Format}" FontFamily="{Binding Path=LeftContextFontName, Converter={StaticResource fontConvert}}" Foreground="{Binding Path=LeftContextFontColor, Converter={StaticResource colorConvert}}" FontSize="{Binding Path=LeftContextFontSize}"/>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <StackPanel Margin="20,10,10,10">
+                        <Label Content="{Binding Path=PersonRecord}" MinHeight="40" FontFamily="{Binding Path=LeftContextFontName, Converter={StaticResource fontConvert}}" Foreground="{Binding Path=LeftContextFontColor, Converter={StaticResource colorConvert}}" FontSize="{Binding Path=LeftContextFontSize}"/>
+                        <Label Content="{Binding Path=AllRoleTotalFormat}" MinHeight="40" FontFamily="{Binding Path=LeftContextFontName, Converter={StaticResource fontConvert}}" Foreground="{Binding Path=LeftContextFontColor, Converter={StaticResource colorConvert}}" FontSize="{Binding Path=LeftContextFontSize}"/>
+                        <Label Name="lblDuty" Content="{Binding Path=DutyNoFormat}" Tag="{Binding Path=DutyDate}" MinHeight="40" FontFamily="{Binding Path=LeftContextFontName, Converter={StaticResource fontConvert}}" Foreground="{Binding Path=LeftContextFontColor, Converter={StaticResource colorConvert}}" FontSize="{Binding Path=LeftContextFontSize}"/>
+                        <Label Content="{Binding Path=NowTime}" MinHeight="40" FontFamily="{Binding Path=LeftContextFontName, Converter={StaticResource fontConvert}}" Foreground="{Binding Path=LeftContextFontColor, Converter={StaticResource colorConvert}}" FontSize="{Binding Path=LeftContextFontSize}"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+
+            <Grid Name="rightGrid" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <Label Name="rightTitle" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding Path=RightTitle}" FontFamily="{Binding Path=RightTitleFontName, Converter={StaticResource fontConvert}}" Foreground="{Binding Path=RightTitleFontColor, Converter={StaticResource colorConvert}}" FontSize="{Binding Path=RightTitleFontSize}"/>
+                <TextBox Grid.Row="1" Text="{Binding Path=NoteText}" TextWrapping="Wrap" AcceptsReturn="True" Background="Black" FontFamily="{Binding Path=RightContextFontName, Converter={StaticResource fontConvert}}" Foreground="{Binding Path=RightContextFontColor, Converter={StaticResource colorConvert}}" FontSize="{Binding Path=RightContextFontSize}"/>
+            </Grid>
+        </Grid>
+        <Border Grid.Row="0" BorderBrush="Red" BorderThickness="3"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <RadioButton Grid.Column="0" Content="屏幕1" FontSize="20" Name="screen1Radio" Foreground="Red" GroupName="screen" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="screen1Radio_Checked" IsChecked="True"/>
+                <RadioButton Grid.Column="1" Content="屏幕2" FontSize="20" Name="screen2Radio" Foreground="Red" GroupName="screen" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="screen2Radio_Checked"/>
+            </Grid>
+            <Button Grid.Column="1" Background="Black" Foreground="Red" Content="下载屏幕参数" FontSize="20" BorderThickness="0" HorizontalAlignment="Stretch" Click="Button_Download_Click"/>
+            <Button Grid.Column="2" Background="Black" Foreground="Red" Content="参数设置" FontSize="20" BorderThickness="0" HorizontalAlignment="Stretch" Click="Button_Settings_Click"/>
+            <Button Grid.Column="3" Background="Black" Foreground="Red" Content="字体设置" FontSize="20" BorderThickness="0" HorizontalAlignment="Stretch" Click="Button_Font_Click"/>
+            <Button Grid.Column="4" Background="Black" Foreground="Red" Content="退出" FontSize="20" BorderThickness="0" HorizontalAlignment="Stretch" Click="Button_Exit_Click"/>
+        </Grid>
+    </Grid>
+
+</Window>
