@@ -68,5 +68,36 @@ namespace AsyMonitor
                 return dataset.Tables[0];
             }
         }
+
+        public static bool ExecuteSql(string sql, SqlParameter[] parameters)
+        {
+            using (SqlCommand cmd = _conn.CreateCommand())
+            {
+                cmd.CommandText = sql;
+                if (null != parameters)
+                {
+                    cmd.Parameters.AddRange(parameters);
+                }
+
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataSet dataset = new DataSet();
+                adapter.Fill(dataset);
+                if(dataset.Tables.Count > 0)
+                {
+                    if(dataset.Tables[0].Rows.Count > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
     }
 }

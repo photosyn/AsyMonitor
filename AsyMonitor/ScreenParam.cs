@@ -1174,7 +1174,6 @@ namespace AsyMonitor
         public void Load()
         {
             string iniFileName = System.AppDomain.CurrentDomain.BaseDirectory + "SysData.ini";
-            RoleGroup = IniFile.INIGetStringValue(iniFileName, "IOMonitor", Reader.RoleGroup, "");
             IpAddr = IniFile.INIGetStringValue(iniFileName, "IOMonitor", Reader.IpAddr, "");
             Port = IniFile.INIGetStringValue(iniFileName, "IOMonitor", Reader.Port, "");
             Id = Convert.ToInt32(IniFile.INIGetStringValue(iniFileName, "IOMonitor", Reader.Id, ""));
@@ -1189,7 +1188,6 @@ namespace AsyMonitor
             LeftTitle = IniFile.INIGetStringValue(iniFileName, "IOMonitor", Reader.LeftTitle, "");
             RightTitle = IniFile.INIGetStringValue(iniFileName, "IOMonitor", Reader.RightTitle, "");
             GroupId = IniFile.INIGetStringValue(iniFileName, "IOMonitor", Reader.GroupId, "");
-            RoleDefault = IniFile.INIGetStringValue(iniFileName, "IOMonitor", Reader.RoleDefault, "");
             LeftTitleFontName = IniFile.INIGetStringValue(iniFileName, "IOMonitor", Reader.LeftTitleFontName, "宋体");
             LeftTitleFontSize = Convert.ToInt32(IniFile.INIGetStringValue(iniFileName, "IOMonitor", Reader.LeftTitleFontSize, "36"));
             LeftTitleFontColor = IniFile.INIGetStringValue(iniFileName, "IOMonitor", Reader.LeftTitleFontColor, "-65535");
@@ -1203,6 +1201,22 @@ namespace AsyMonitor
             RightContextFontSize = Convert.ToInt32(IniFile.INIGetStringValue(iniFileName, "IOMonitor", Reader.RightContextFontSize, "12"));
             RightContextFontColor = IniFile.INIGetStringValue(iniFileName, "IOMonitor", Reader.RightContextFontColor, "-65535");
 
+            string sql = "SELECT * FROM AcvB_AsyMonitorInfo";
+            SqlParameter[] paras = null;
+
+            DataTable dataTable = null;
+            dataTable = SqlHelper.ExecuteDataTable(sql, paras);
+            if(Reader.RoleGroup.Equals("Roles") && dataTable.Rows.Count >= 1)
+            {
+                RoleGroup = dataTable.Rows[0]["Monitor_Roles"].ToString();
+                RoleDefault = dataTable.Rows[0]["Monitor_RoleDefault"].ToString();
+            }
+            if (Reader.RoleGroup.Equals("Roles2") && dataTable.Rows.Count >= 2)
+            {
+                RoleGroup = dataTable.Rows[1]["Monitor_Roles"].ToString();
+                RoleDefault = dataTable.Rows[1]["Monitor_RoleDefault"].ToString();
+            }
+
             System.IO.StreamReader st;
             st = new System.IO.StreamReader(Reader.NoteText, System.Text.Encoding.UTF8);
             //UTF-8通用编码
@@ -1213,7 +1227,6 @@ namespace AsyMonitor
         public void Save()
         {
             string iniFileName = System.AppDomain.CurrentDomain.BaseDirectory + "SysData.ini";
-            IniFile.INIWriteValue(iniFileName, "IOMonitor", Reader.RoleGroup, RoleGroup);
             IniFile.INIWriteValue(iniFileName, "IOMonitor", Reader.IpAddr, IpAddr);
             IniFile.INIWriteValue(iniFileName, "IOMonitor", Reader.Port, Port);
             IniFile.INIWriteValue(iniFileName, "IOMonitor", Reader.Id, Id.ToString());
@@ -1228,7 +1241,19 @@ namespace AsyMonitor
             IniFile.INIWriteValue(iniFileName, "IOMonitor", Reader.LeftTitle, LeftTitle);
             IniFile.INIWriteValue(iniFileName, "IOMonitor", Reader.RightTitle, RightTitle);
             IniFile.INIWriteValue(iniFileName, "IOMonitor", Reader.GroupId, GroupId);
-            IniFile.INIWriteValue(iniFileName, "IOMonitor", Reader.RoleDefault, RoleDefault);
+
+            string sql = "UPDATE AcvB_AsyMonitorInfo SET Monitor_Roles = '" + RoleGroup + "', Monitor_RoleDefault = '" + RoleDefault + "'" ;
+            SqlParameter[] paras = null;
+
+            if (Reader.RoleGroup.Equals("Roles"))
+            {
+                sql += " WHERE Screen_ID = 1";
+            }
+            if (Reader.RoleGroup.Equals("Roles2"))
+            {
+                sql += " WHERE Screen_ID = 2";
+            }
+            SqlHelper.ExecuteSql(sql, paras);
 
             System.IO.StreamWriter sw = new System.IO.StreamWriter(Reader.NoteText);
             sw.WriteLine(NoteText);

@@ -70,9 +70,9 @@ namespace AsyMonitor
                     roleDefault = role.RoleId;
                 }
             }
-            string group_id = IniFile.INIGetStringValue(System.AppDomain.CurrentDomain.BaseDirectory + "SysData.ini", "IOMonitor", screen1Param.ScreenParam.Reader.GroupId, "");
+            //string group_id = IniFile.INIGetStringValue(System.AppDomain.CurrentDomain.BaseDirectory + "SysData.ini", "IOMonitor", screen1Param.ScreenParam.Reader.GroupId, "");
             if (!screen1Param.ScreenParam.RoleGroup.Equals(roleGroups)
-                || !screen1Param.ScreenParam.GroupId.Equals(group_id)
+                //|| !screen1Param.ScreenParam.GroupId.Equals(group_id)
                 || !screen1Param.ScreenParam.RoleDefault.Equals(roleDefault))
             {
                 screen1Param.ScreenParam.RoleGroup = roleGroups;
@@ -100,9 +100,9 @@ namespace AsyMonitor
                     roleDefault = role.RoleId;
                 }
             }
-            group_id = IniFile.INIGetStringValue(System.AppDomain.CurrentDomain.BaseDirectory + "SysData.ini", "IOMonitor", screen2Param.ScreenParam.Reader.GroupId, "");
+            //group_id = IniFile.INIGetStringValue(System.AppDomain.CurrentDomain.BaseDirectory + "SysData.ini", "IOMonitor", screen2Param.ScreenParam.Reader.GroupId, "");
             if (!screen2Param.ScreenParam.RoleGroup.Equals(roleGroups)
-                || !screen2Param.ScreenParam.GroupId.Equals(group_id)
+                //|| !screen2Param.ScreenParam.GroupId.Equals(group_id)
                 || !screen2Param.ScreenParam.RoleDefault.Equals(roleDefault))
             {
                 screen2Param.ScreenParam.RoleGroup = roleGroups;

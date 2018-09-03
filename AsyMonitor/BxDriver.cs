@@ -496,9 +496,9 @@ namespace AsyMonitor
 
             if (System.IO.File.Exists(screenParam.Reader.MonitorText))
             {
-                //Color color = ColorTranslator.FromHtml(screenParam.LeftContextFontColor);
-                //int colorValue = color.B << 16 | color.G << 8 | color.R;
-                int colorValue = Convert.ToInt32(screenParam.LeftContextFontColor);
+                Color color = ColorTranslator.FromHtml(screenParam.LeftContextFontColor);
+                int colorValue = color.B << 16 | color.G << 8 | color.R;
+                //int colorValue = Convert.ToInt32(screenParam.LeftContextFontColor);
                 nResult = AddScreenDynamicAreaFile(screenParam.Id, 0
                 , screenParam.Reader.MonitorText, 0, 0, screenParam.LeftContextFontName, screenParam.LeftContextFontSize, 0, colorValue
                 , 1, 2, 1);
@@ -524,9 +524,9 @@ namespace AsyMonitor
 
             if (System.IO.File.Exists(screenParam.Reader.NoteText))
             {
-                //Color color = ColorTranslator.FromHtml(screenParam.RightContextFontColor);
-                //int colorValue = color.B << 16 | color.G << 8 | color.R;
-                int colorValue = Convert.ToInt32(screenParam.RightContextFontColor);
+                Color color = ColorTranslator.FromHtml(screenParam.RightContextFontColor);
+                int colorValue = color.B << 16 | color.G << 8 | color.R;
+                //int colorValue = Convert.ToInt32(screenParam.RightContextFontColor);
                 nResult = AddScreenDynamicAreaFile(screenParam.Id, 1
                 , screenParam.Reader.NoteText, 0, 0, screenParam.RightContextFontName, screenParam.RightContextFontSize, 0, colorValue
                 , 5, 10, 10);

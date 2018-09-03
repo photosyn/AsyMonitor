@@ -34,7 +34,19 @@ namespace AsyMonitor
         public MyGroupList(string deviceKey)
         {
             _devicesKey = deviceKey;
-            _devices = IniFile.INIGetStringValue(System.AppDomain.CurrentDomain.BaseDirectory + "SysData.ini", "IOMonitor", _devicesKey, "");
+            string sql = "SELECT * FROM AcvB_AsyMonitorInfo";
+            SqlParameter[] param = null;
+
+            DataTable dataTable = null;
+            dataTable = SqlHelper.ExecuteDataTable(sql, param);
+            if (_devicesKey.Equals("Devs") && dataTable.Rows.Count >= 1)
+            {
+                _devices = dataTable.Rows[0]["Monitor_Devs"].ToString();
+            }
+            if (_devicesKey.Equals("Devs2") && dataTable.Rows.Count >= 2)
+            {
+                _devices = dataTable.Rows[1]["Monitor_Devs"].ToString();
+            }
             DevicesFormat = formatDevices(_devices);
             InitializeComponent();
             InitializeTreeView();
@@ -79,7 +91,18 @@ namespace AsyMonitor
             }
             _devices = didGroups;
             DevicesFormat = formatDevices(_devices);
-            IniFile.INIWriteValue(System.AppDomain.CurrentDomain.BaseDirectory + "SysData.ini", "IOMonitor", _devicesKey, _devices);
+            string sql = "UPDATE AcvB_AsyMonitorInfo SET Monitor_Devs = '" + _devices + "'"; ;
+            SqlParameter[] paras = null;
+
+            if (_devicesKey.Equals("Devs"))
+            {
+                sql += " WHERE Screen_ID = 1";
+            }
+            if (_devicesKey.Equals("Devs2"))
+            {
+                sql += " WHERE Screen_ID = 2";
+            }
+            SqlHelper.ExecuteSql(sql, paras);
         }
 
         private void InitializeTreeView()

@@ -25,6 +25,7 @@ namespace AsyMonitor
         public MainWindow()
         {
             SqlHelper.Init();
+            UpdateAsyMonitor();
             InitializeScreenParam();
             InitializeScreenGroup();
             InitializeComponent();
@@ -34,6 +35,48 @@ namespace AsyMonitor
             InitScreen();
 
 
+        }
+
+        private void UpdateAsyMonitor()
+        {
+            //string sql = "IF NOT EXISTS (SELECT* FROM sysobjects WHERE Name = 'AcvB_AsyMonitorInfo') " +
+            //    "CREATE TABLE AcvB_AsyMonitorInfo([Screen_ID] [int] IDENTITY(1,1) NOT NULL,[Monitor_Roles] [varchar](200) NULL,[Monitor_Devs] [varchar](200) NULL)" +
+            //    "INSERT INTO AcvB_AsyMonitorInfo(Monitor_Roles,Monitor_Devs) VALUES ('', ''),('', '')";
+            string sql = "SELECT * FROM sysobjects WHERE Name = 'AcvB_AsyMonitorInfo'";
+            SqlParameter[] paras = null;
+
+            DataTable dataTable = null;
+            dataTable = SqlHelper.ExecuteDataTable(sql, paras);
+            if(dataTable.Rows.Count <= 0)
+            {
+                string roles = "";
+                string roleDefault = "";
+                dataTable = SqlHelper.ExecuteDataTable("select * from General_Role where Base_IsDel='0'", paras);
+                foreach (DataRow dt in dataTable.Rows)
+                {
+                    roleDefault = dt["Base_RoleID"].ToString();
+                    if (roles.Length == 0)
+                    {
+                        roles = dt["Base_RoleID"].ToString();
+                    }
+                    else
+                    {
+                        roles += "," + dt["Base_RoleID"].ToString();
+                    }
+                }
+
+                string iniFileName = System.AppDomain.CurrentDomain.BaseDirectory + "SysData.ini";
+                string devs1 = IniFile.INIGetStringValue(iniFileName, "IOMonitor", "Devs", "");
+                string devs2 = IniFile.INIGetStringValue(iniFileName, "IOMonitor", "Devs2", "");
+                paras = new SqlParameter[4];
+                paras[0] = new SqlParameter("@devs1", devs1);
+                paras[1] = new SqlParameter("@devs2", devs2);
+                paras[2] = new SqlParameter("@roles", roles);
+                paras[3] = new SqlParameter("@roleDefault", roleDefault);
+                sql = "CREATE TABLE AcvB_AsyMonitorInfo([Screen_ID] [int] IDENTITY(1,1) NOT NULL,[Monitor_Devs] [varchar](200) NULL,[Monitor_Roles] [varchar](200) NULL,[Monitor_RoleDefault] [varchar](100) NULL)" +
+                    "INSERT INTO AcvB_AsyMonitorInfo(Monitor_Devs,Monitor_Roles,Monitor_RoleDefault) VALUES (@devs1, @roles, @roleDefault),(@devs2, @roles, @roleDefault)";
+                SqlHelper.ExecuteSql(sql, paras);
+            }
         }
 
         private void AreaMonitor(ScreenParam screenParam, MyGroupList myGroupList)
