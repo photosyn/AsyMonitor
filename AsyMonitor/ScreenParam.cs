@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
-using System.Linq;
 
 namespace AsyMonitor
 {
@@ -1062,8 +1061,41 @@ namespace AsyMonitor
             }
         }
 
-        public void CalcAllRoleTotal()
+        public void ShowRoleStatistics()
         {
+            if (RoleName1.Length > 0)
+            {
+                RoleTotal1Format = String.Format(formatPersonSyntax, RoleTotal1) + roleTotalSuffix;
+            }
+            if (RoleName2.Length > 0)
+            {
+                RoleTotal2Format = String.Format(formatPersonSyntax, RoleTotal2) + roleTotalSuffix;
+            }
+            if (RoleName3.Length > 0)
+            {
+                RoleTotal3Format = String.Format(formatPersonSyntax, RoleTotal3) + roleTotalSuffix;
+            }
+            if (RoleName4.Length > 0)
+            {
+                RoleTotal4Format = String.Format(formatPersonSyntax, RoleTotal4) + roleTotalSuffix;
+            }
+            if (RoleName5.Length > 0)
+            {
+                RoleTotal5Format = String.Format(formatPersonSyntax, RoleTotal5) + roleTotalSuffix;
+            }
+            if (RoleName6.Length > 0)
+            {
+                RoleTotal6Format = String.Format(formatPersonSyntax, RoleTotal6) + roleTotalSuffix;
+            }
+            if (RoleName7.Length > 0)
+            {
+                RoleTotal7Format = String.Format(formatPersonSyntax, RoleTotal7) + roleTotalSuffix;
+            }
+            if (RoleName8.Length > 0)
+            {
+                RoleTotal8Format = String.Format(formatPersonSyntax, RoleTotal8) + roleTotalSuffix;
+            }
+
             AllRoleTotal = RoleTotal1 + RoleTotal2 + RoleTotal3 + RoleTotal4 + RoleTotal5 + RoleTotal6 + RoleTotal7 + RoleTotal8;
             AllRoleTotalFormat = roleTotalPrefix + String.Format("{0, 4:D3}", AllRoleTotal) + roleTotalSuffix;
         }
@@ -1087,42 +1119,34 @@ namespace AsyMonitor
                 if (roleId.Equals(RoleId1))
                 {
                     RoleTotal1 += total;
-                    RoleTotal1Format = String.Format(formatPersonSyntax, RoleTotal1) + roleTotalSuffix;
                 }
                 else if (roleId.Equals(RoleId2))
                 {
                     RoleTotal2 += total;
-                    RoleTotal2Format = String.Format(formatPersonSyntax, RoleTotal2) + roleTotalSuffix;
                 }
                 else if (roleId.Equals(RoleId3))
                 {
                     RoleTotal3 += total;
-                    RoleTotal3Format = String.Format(formatPersonSyntax, RoleTotal3) + roleTotalSuffix;
                 }
                 else if (roleId.Equals(RoleId4))
                 {
                     RoleTotal4 += total;
-                    RoleTotal4Format = String.Format(formatPersonSyntax, RoleTotal4) + roleTotalSuffix;
                 }
                 else if (roleId.Equals(RoleId5))
                 {
                     RoleTotal5 += total;
-                    RoleTotal5Format = String.Format(formatPersonSyntax, RoleTotal5) + roleTotalSuffix;
                 }
                 else if (roleId.Equals(RoleId6))
                 {
                     RoleTotal6 += total;
-                    RoleTotal6Format = String.Format(formatPersonSyntax, RoleTotal6) + roleTotalSuffix;
                 }
                 else if (roleId.Equals(RoleId7))
                 {
                     RoleTotal7 += total;
-                    RoleTotal7Format = String.Format(formatPersonSyntax, RoleTotal7) + roleTotalSuffix;
                 }
                 else if (roleId.Equals(RoleId8))
                 {
                     RoleTotal8 += total;
-                    RoleTotal8Format = String.Format(formatPersonSyntax, RoleTotal8) + roleTotalSuffix;
                 }
             }
             else
@@ -1131,42 +1155,34 @@ namespace AsyMonitor
                 if (RoleDefault.Equals(RoleId1))
                 {
                     RoleTotal1 += total;
-                    RoleTotal1Format = String.Format(formatPersonSyntax, RoleTotal1) + roleTotalSuffix;
                 }
                 else if (RoleDefault.Equals(RoleId2))
                 {
                     RoleTotal2 += total;
-                    RoleTotal2Format = String.Format(formatPersonSyntax, RoleTotal2) + roleTotalSuffix;
                 }
                 else if (RoleDefault.Equals(RoleId3))
                 {
                     RoleTotal3 += total;
-                    RoleTotal3Format = String.Format(formatPersonSyntax, RoleTotal3) + roleTotalSuffix;
                 }
                 else if (RoleDefault.Equals(RoleId4))
                 {
                     RoleTotal4 += total;
-                    RoleTotal4Format = String.Format(formatPersonSyntax, RoleTotal4) + roleTotalSuffix;
                 }
                 else if (RoleDefault.Equals(RoleId5))
                 {
                     RoleTotal5 += total;
-                    RoleTotal5Format = String.Format(formatPersonSyntax, RoleTotal5) + roleTotalSuffix;
                 }
                 else if (RoleDefault.Equals(RoleId6))
                 {
                     RoleTotal6 += total;
-                    RoleTotal6Format = String.Format(formatPersonSyntax, RoleTotal6) + roleTotalSuffix;
                 }
                 else if (RoleDefault.Equals(RoleId7))
                 {
                     RoleTotal7 += total;
-                    RoleTotal7Format = String.Format(formatPersonSyntax, RoleTotal7) + roleTotalSuffix;
                 }
                 else if (RoleDefault.Equals(RoleId8))
                 {
                     RoleTotal8 += total;
-                    RoleTotal8Format = String.Format(formatPersonSyntax, RoleTotal8) + roleTotalSuffix;
                 }
             }
         }
@@ -1206,7 +1222,7 @@ namespace AsyMonitor
 
             DataTable dataTable = null;
             dataTable = SqlHelper.ExecuteDataTable(sql, paras);
-            if(Reader.RoleGroup.Equals("Roles") && dataTable.Rows.Count >= 1)
+            if (Reader.RoleGroup.Equals("Roles") && dataTable.Rows.Count >= 1)
             {
                 RoleGroup = dataTable.Rows[0]["Monitor_Roles"].ToString();
                 RoleDefault = dataTable.Rows[0]["Monitor_RoleDefault"].ToString();
@@ -1242,7 +1258,7 @@ namespace AsyMonitor
             IniFile.INIWriteValue(iniFileName, "IOMonitor", Reader.RightTitle, RightTitle);
             IniFile.INIWriteValue(iniFileName, "IOMonitor", Reader.GroupId, GroupId);
 
-            string sql = "UPDATE AcvB_AsyMonitorInfo SET Monitor_Roles = '" + RoleGroup + "', Monitor_RoleDefault = '" + RoleDefault + "'" ;
+            string sql = "UPDATE AcvB_AsyMonitorInfo SET Monitor_Roles = '" + RoleGroup + "', Monitor_RoleDefault = '" + RoleDefault + "'";
             SqlParameter[] paras = null;
 
             if (Reader.RoleGroup.Equals("Roles"))

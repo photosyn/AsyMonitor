@@ -4,9 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:convert="clr-namespace:AsyMonitor.Converters"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         x:Class="AsyMonitor.MainWindow"
         mc:Ignorable="d"
-        Title="AsyMonitor" Height="678" Width="1171" Closing="Window_Close" Loaded="Window_Loaded">
+        Title="AsyMonitor" Icon="icons/左上角.png" Height="678" Width="1171" Closing="Window_Close" Loaded="Window_Loaded">
 
     <Window.Resources>
         <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
@@ -118,7 +119,7 @@
                     <RowDefinition Height="5*"/>
                 </Grid.RowDefinitions>
                 <Label Name="rightTitle" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding Path=RightTitle}" FontFamily="{Binding Path=RightTitleFontName, Converter={StaticResource fontConvert}}" Foreground="{Binding Path=RightTitleFontColor, Converter={StaticResource colorConvert}}" FontSize="{Binding Path=RightTitleFontSize}"/>
-                <TextBox Grid.Row="1" Text="{Binding Path=NoteText}" TextWrapping="Wrap" AcceptsReturn="True" Background="Black" FontFamily="{Binding Path=RightContextFontName, Converter={StaticResource fontConvert}}" Foreground="{Binding Path=RightContextFontColor, Converter={StaticResource colorConvert}}" FontSize="{Binding Path=RightContextFontSize}"/>
+                <TextBlock Grid.Row="1" Text="{Binding Path=NoteText}" TextWrapping="Wrap" Background="Black" FontFamily="{Binding Path=RightContextFontName, Converter={StaticResource fontConvert}}" Foreground="{Binding Path=RightContextFontColor, Converter={StaticResource colorConvert}}" FontSize="{Binding Path=RightContextFontSize}"/>
             </Grid>
         </Grid>
         <Border Grid.Row="0" BorderBrush="Red" BorderThickness="3"/>
@@ -138,10 +139,26 @@
                 <RadioButton Grid.Column="0" Content="屏幕1" FontSize="20" Name="screen1Radio" Foreground="Red" GroupName="screen" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="screen1Radio_Checked" IsChecked="True"/>
                 <RadioButton Grid.Column="1" Content="屏幕2" FontSize="20" Name="screen2Radio" Foreground="Red" GroupName="screen" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="screen2Radio_Checked"/>
             </Grid>
-            <Button Grid.Column="1" Background="Black" Foreground="Red" Content="下载屏幕参数" FontSize="20" BorderThickness="0" HorizontalAlignment="Stretch" Click="Button_Download_Click"/>
-            <Button Grid.Column="2" Background="Black" Foreground="Red" Content="参数设置" FontSize="20" BorderThickness="0" HorizontalAlignment="Stretch" Click="Button_Settings_Click"/>
-            <Button Grid.Column="3" Background="Black" Foreground="Red" Content="字体设置" FontSize="20" BorderThickness="0" HorizontalAlignment="Stretch" Click="Button_Font_Click"/>
-            <Button Grid.Column="4" Background="Black" Foreground="Red" Content="退出" FontSize="20" BorderThickness="0" HorizontalAlignment="Stretch" Click="Button_Exit_Click"/>
+            <xctk:IconButton Grid.Column="1" Background="Black" Foreground="Red" Content="下载屏幕参数" FontSize="20" BorderThickness="0" HorizontalAlignment="Stretch" Click="Button_Download_Click">
+                <xctk:IconButton.Icon>
+                    <Image Source="icons/下载.png"  Margin="0,0,8,0"/>
+                </xctk:IconButton.Icon>
+            </xctk:IconButton>
+            <xctk:IconButton Grid.Column="2" Background="Black" Foreground="Red" Content="参数设置" FontSize="20" BorderThickness="0" HorizontalAlignment="Stretch" Click="Button_Settings_Click">
+                <xctk:IconButton.Icon>
+                    <Image Source="icons/设置.png"  Margin="0,0,8,0"/>
+                </xctk:IconButton.Icon>
+            </xctk:IconButton>
+            <xctk:IconButton Grid.Column="3" Background="Black" Foreground="Red" Content="字体设置" FontSize="20" BorderThickness="0" HorizontalAlignment="Stretch" Click="Button_Font_Click">
+                <xctk:IconButton.Icon>
+                    <Image Source="icons/字体.png"  Margin="0,0,8,0"/>
+                </xctk:IconButton.Icon>
+            </xctk:IconButton>
+            <xctk:IconButton Grid.Column="4" Background="Black" Foreground="Red" Content="退出" FontSize="20" BorderThickness="0" HorizontalAlignment="Stretch" Click="Button_Exit_Click">
+                <xctk:IconButton.Icon>
+                    <Image Source="icons/退出.png" Margin="0,0,8,0"/>
+                </xctk:IconButton.Icon>
+            </xctk:IconButton>
         </Grid>
     </Grid>
 

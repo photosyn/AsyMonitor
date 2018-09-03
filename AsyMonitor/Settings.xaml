@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AsyMonitor"
         mc:Ignorable="d"
-        Title="参数设置" Height="400" Width="640" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        Title="参数设置" Icon="icons/左上角3.png" Height="400" Width="640" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="90*"/>

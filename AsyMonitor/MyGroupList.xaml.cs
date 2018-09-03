@@ -4,17 +4,8 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace AsyMonitor
 {
@@ -57,10 +48,10 @@ namespace AsyMonitor
         {
             string formatStr = "";
             string[] deviceList = source.Split(',');
-            
+
             foreach (string device in deviceList)
             {
-                if(formatStr.Length > 0)
+                if (formatStr.Length > 0)
                 {
                     formatStr += ",'" + device + "'";
                 }
@@ -75,11 +66,11 @@ namespace AsyMonitor
         public void Save()
         {
             string didGroups = "";
-            foreach(Device device in deviceList)
+            foreach (Device device in deviceList)
             {
-                if(device.Ischeck)
+                if (device.Ischeck)
                 {
-                    if(didGroups.Length == 0)
+                    if (didGroups.Length == 0)
                     {
                         didGroups = device.Did.ToString();
                     }
@@ -169,7 +160,7 @@ namespace AsyMonitor
             SqlParameter[] paras = null;
             string sql = "select Device_ID as Did, Device_Name as Name, Device_Location as Location from AcvB_Device where Device_Status <> '1' " +
                 "and Board_ID not in (select Board_ID from AcvB_DevForbidden where Base_OperCode = 'SYSTEM')";
-            if(!groupNo.Equals("ROOT"))
+            if (!groupNo.Equals("ROOT"))
             {
                 sql += " and Group_No like " + "\'" + groupNo + "%" + "\'";
             }
@@ -203,7 +194,7 @@ namespace AsyMonitor
         private void treeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             TreeNode treeNode = (TreeNode)this.treeView.SelectedItem;
-            if(null != treeNode)
+            if (null != treeNode)
             {
                 UpdateListView(treeNode.Key);
             }

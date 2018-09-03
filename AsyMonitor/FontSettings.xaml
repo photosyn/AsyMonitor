@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AsyMonitor"
         mc:Ignorable="d"
-        Title="字体设置"  Height="400" Width="640" WindowStartupLocation="CenterScreen">
+        Title="字体设置" Icon="icons/左上角3.png" Height="400" Width="640" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="90*"/>
@@ -22,10 +22,10 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Row="0" Grid.Column="0" Content="左标题字体" Click="Button_Click_Screen1LetfTitle"></Button>
-                    <Button Grid.Row="0" Grid.Column="1" Content="右标题字体" Click="Button_Click_Screen1RightTitle"></Button>
-                    <Button Grid.Row="1" Grid.Column="0" Content="左屏信息字体" Click="Button_Click_Screen1LeftContext"></Button>
-                    <Button Grid.Row="1" Grid.Column="1" Content="右屏信息字体" Click="Button_Click_Screen1RightContext"></Button>
+                    <Button Grid.Row="0" Grid.Column="0" Content="左标题字体" FontSize="32" Click="Button_Click_Screen1LetfTitle"></Button>
+                    <Button Grid.Row="0" Grid.Column="1" Content="右标题字体" FontSize="32" Click="Button_Click_Screen1RightTitle"></Button>
+                    <Button Grid.Row="1" Grid.Column="0" Content="左屏信息字体" FontSize="32" Click="Button_Click_Screen1LeftContext"></Button>
+                    <Button Grid.Row="1" Grid.Column="1" Content="右屏信息字体" FontSize="32" Click="Button_Click_Screen1RightContext"></Button>
                 </Grid>
             </TabItem>
             <TabItem Name="screen2FontTab" Header="屏幕2字体设置">
@@ -38,10 +38,10 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Row="0" Grid.Column="0" Content="左标题字体" Click="Button_Click_Screen2LeftTitle"></Button>
-                    <Button Grid.Row="0" Grid.Column="1" Content="右标题字体" Click="Button_Click_Screen2RightTitle"></Button>
-                    <Button Grid.Row="1" Grid.Column="0" Content="左屏信息字体" Click="Button_Click_Screen2LeftContext"></Button>
-                    <Button Grid.Row="1" Grid.Column="1" Content="右屏信息字体" Click="Button_Click_Screen2RightContext"></Button>
+                    <Button Grid.Row="0" Grid.Column="0" Content="左标题字体" FontSize="32" Click="Button_Click_Screen2LeftTitle"></Button>
+                    <Button Grid.Row="0" Grid.Column="1" Content="右标题字体" FontSize="32" Click="Button_Click_Screen2RightTitle"></Button>
+                    <Button Grid.Row="1" Grid.Column="0" Content="左屏信息字体" FontSize="32" Click="Button_Click_Screen2LeftContext"></Button>
+                    <Button Grid.Row="1" Grid.Column="1" Content="右屏信息字体" FontSize="32" Click="Button_Click_Screen2RightContext"></Button>
                 </Grid>
             </TabItem>
         </TabControl>

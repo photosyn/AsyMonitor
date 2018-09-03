@@ -4,8 +4,38 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="AsyMonitor.MyScreenParam"
+             xmlns:validations="clr-namespace:AsyMonitor"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style x:Key="ValidationTextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="True">
+                            <TextBlock DockPanel.Dock="Right"
+                                           Foreground="Red" FontSize="14" FontWeight="Bold"
+                                           ToolTip="{Binding ElementName=adornerPlaceholder,
+                                           Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                                    *
+                            </TextBlock>
+                            <Border BorderBrush="Red" BorderThickness="1" CornerRadius="3">
+                                <AdornedElementPlaceholder Name="adornerPlaceholder"></AdornedElementPlaceholder>
+                            </Border>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+                                Value="{Binding RelativeSource={RelativeSource Self},
+                                Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    
     <Grid x:Name="topGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="40*"/>
@@ -30,23 +60,41 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Grid.Column="0" Content="屏幕IP地址"/>
-            <TextBox Grid.Row="0" Grid.Column="1" x:Name="ipAddr" Text="{Binding IpAddr}"/>
+            <TextBox Grid.Row="0" Grid.Column="1" x:Name="ipAddr" InputMethod.IsInputMethodEnabled="False" Style="{StaticResource ValidationTextBoxStyle}" KeyDown="ipAddr_KeyDown">
+                <TextBox.Text>
+                    <Binding Path="IpAddr" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validations:IPAddressRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <!--<xctk:MaskedTextBox Grid.Row="0" Grid.Column="1" Name="ipAddr" Mask="999.999.##9.999" Text="192.168.001.183" IncludeLiteralsInValue="True"/>-->
             <Label Grid.Row="1" Grid.Column="0" Content="通信端口"/>
-            <TextBox Grid.Row="1" Grid.Column="1" x:Name="ipPort" Text="{Binding Port}"/>
+            <!--<TextBox Grid.Row="1" Grid.Column="1" x:Name="ipPort" Text="{Binding Port}"/>-->
+            <TextBox Grid.Row="1" Grid.Column="1" x:Name="ipPort" InputMethod.IsInputMethodEnabled="False" Style="{StaticResource ValidationTextBoxStyle}" KeyDown="ipPort_KeyDown">
+                <TextBox.Text>
+                    <Binding Path="Port" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validations:PortValidationRule ValidatesOnTargetUpdated="True" MinValue="1" MaxValue="65535"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
             <Label Grid.Row="2" Grid.Column="0" Content="屏号"/>
             <!--<dxe:SpinEdit Grid.Row="2" Grid.Column="1" MinValue="1" MaxValue="65535" Increment="1" Value="{Binding Id}"/>-->
             <xctk:ButtonSpinner Grid.Row="2" Grid.Column="1"  Spin="ButtonSpinner_Spin_Id">
-                <TextBox Text="{Binding Path=Id}" HorizontalContentAlignment="Right"/>
+                <TextBlock Text="{Binding Path=Id}" HorizontalAlignment="Right"/>
             </xctk:ButtonSpinner>
             <Label Grid.Row="3" Grid.Column="0" Content="屏幕宽度"/>
             <!--<dxe:SpinEdit Grid.Row="3" Grid.Column="1" MinValue="64" MaxValue="2048" Increment="16" Value="{Binding Width}"/>-->
             <xctk:ButtonSpinner Grid.Row="3" Grid.Column="1" Spin="ButtonSpinner_Spin_Width">
-                <TextBox Text="{Binding Path=Width}" HorizontalContentAlignment="Right"/>
+                <TextBlock Text="{Binding Path=Width}" HorizontalAlignment="Right"/>
             </xctk:ButtonSpinner>
             <Label Grid.Row="4" Grid.Column="0" Content="屏幕高度"/>
             <!--<dxe:SpinEdit Grid.Row="4" Grid.Column="1" MinValue="16" MaxValue="512" Increment="16" Value="{Binding High}"/>-->
             <xctk:ButtonSpinner Grid.Row="4" Grid.Column="1"  Spin="ButtonSpinner_Spin_High">
-                <TextBox Text="{Binding Path=High}" HorizontalContentAlignment="Right"/>
+                <TextBlock Text="{Binding Path=High}" HorizontalAlignment="Right"/>
             </xctk:ButtonSpinner>
             <Label Grid.Row="5" Grid.Column="0" Content="屏类型"/>
             <ComboBox Grid.Row="5" Grid.Column="1" SelectedIndex="{Binding Type}">
@@ -66,10 +114,10 @@
             <Label Grid.Row="8" Grid.Column="0" Content="总值班号"/>
             <TextBox Grid.Row="8" Grid.Column="1" x:Name="dutyNo" Text="{Binding DutyNo}"/>
             <Label Grid.Row="9" Grid.Column="0" Content="值班更新时间"/>
-            <xctk:DateTimeUpDown Name="timeCtrl" Grid.Row="9" Grid.Column="1" Text="{Binding UpdateTime, Mode=OneTime}" ValueChanged="timeCtrl_ValueChanged" Format="Custom" FormatString="hh:mm:ss" />
+            <xctk:DateTimeUpDown Name="timeCtrl" Grid.Row="9" Grid.Column="1" AllowTextInput="False" Text="{Binding UpdateTime, Mode=OneTime}" ValueChanged="timeCtrl_ValueChanged" Format="Custom" FormatString="hh:mm:ss" />
             <!--<xctk:DateTimeUpDown Grid.Row="9" Grid.Column="1" Value="12:30:00" Format="Custom" FormatString="hh:mm:tt" />-->
             <Label Grid.Row="10" Grid.Column="0" Content="通知翻屏（秒）"/>
-            <TextBox Grid.Row="10" Grid.Column="1" x:Name="convertTime" Text="{Binding NotifyTime}"/>
+            <TextBox Grid.Row="10" Grid.Column="1" x:Name="convertTime" Text="{Binding NotifyTime}" InputMethod.IsInputMethodEnabled="False" KeyDown="convertTime_KeyDown"/>
         </Grid>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
@@ -94,7 +142,7 @@
                 <ComboBox Grid.Row="2" Grid.Column="1" x:Name="groupComboBox" DisplayMemberPath="GroupName" SelectedValuePath="AuthId" SelectedValue="{Binding GroupId}"/>
             </Grid>
             <GroupBox Grid.Row="1" Header="通知信息">
-                <TextBox  x:Name="noteText" Text="{Binding NoteText}"/>
+                <TextBox TextWrapping="Wrap" AcceptsReturn="True"  x:Name="noteText" Text="{Binding NoteText}"/>
             </GroupBox>
         </Grid>
     </Grid>

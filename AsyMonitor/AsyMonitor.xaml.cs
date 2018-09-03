@@ -174,7 +174,7 @@ namespace AsyMonitor
                 int count = dt.Field<int>("PerCount");
                 screenParam.SetRoleTotal(role_id, count);
             }
-            screenParam.CalcAllRoleTotal();
+            screenParam.ShowRoleStatistics();
 
             screenParam.GenerateFile();
         }

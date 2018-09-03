@@ -3,17 +3,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Xceed.Wpf.Toolkit;
 
 namespace AsyMonitor
@@ -33,7 +25,7 @@ namespace AsyMonitor
             ScreenParam = new ScreenParam(reader);
             this.topGrid.DataContext = ScreenParam;
             InitializeGroupCombo();
-            
+
         }
 
         private void InitializeGroupCombo()
@@ -88,6 +80,54 @@ namespace AsyMonitor
         private void timeCtrl_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             ScreenParam.UpdateTime = this.timeCtrl.Text;
+        }
+
+        private void ipAddr_KeyDown(object sender, KeyEventArgs e)
+        {
+            bool shiftKey = (Keyboard.Modifiers & ModifierKeys.Shift) != 0;//判断shifu键是否按下
+            if (shiftKey == true)                  //当按下shift
+            {
+                e.Handled = true;//不可输入
+            }
+            else                           //未按shift
+            {
+                if (!((e.Key >= Key.D0 && e.Key <= Key.D9) || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9) || e.Key == Key.Delete || e.Key == Key.Back || e.Key == Key.Decimal))
+                {
+                    e.Handled = true;//不可输入
+                }
+            }
+        }
+
+        private void ipPort_KeyDown(object sender, KeyEventArgs e)
+        {
+            bool shiftKey = (Keyboard.Modifiers & ModifierKeys.Shift) != 0;//判断shifu键是否按下
+            if (shiftKey == true)                  //当按下shift
+            {
+                e.Handled = true;//不可输入
+            }
+            else                           //未按shift
+            {
+                if (!((e.Key >= Key.D0 && e.Key <= Key.D9) || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9) || e.Key == Key.Delete || e.Key == Key.Back))
+                {
+                    e.Handled = true;//不可输入
+                }
+            }
+        }
+
+        private void convertTime_KeyDown(object sender, KeyEventArgs e)
+        {
+            bool shiftKey = (Keyboard.Modifiers & ModifierKeys.Shift) != 0;//判断shifu键是否按下
+            if (shiftKey == true)                  //当按下shift
+            {
+                e.Handled = true;//不可输入
+            }
+            else                           //未按shift
+            {
+                if (!((e.Key >= Key.D0 && e.Key <= Key.D9) || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9) || e.Key == Key.Delete || e.Key == Key.Back))
+                {
+                    e.Handled = true;//不可输入
+                }
+            }
         }
     }
 }
