@@ -24,7 +24,6 @@ namespace AsyMonitor
 
         public MainWindow()
         {
-            SqlHelper.Init();
             UpdateAsyMonitor();
             InitializeScreenParam();
             InitializeScreenGroup();

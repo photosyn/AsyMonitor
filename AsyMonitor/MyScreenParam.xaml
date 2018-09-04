@@ -6,7 +6,7 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="AsyMonitor.MyScreenParam"
              xmlns:validations="clr-namespace:AsyMonitor"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="380" d:DesignWidth="360">
     <UserControl.Resources>
         <Style x:Key="ValidationTextBoxStyle" TargetType="{x:Type TextBox}">
             <Setter Property="Validation.ErrorTemplate">
@@ -38,8 +38,8 @@
     
     <Grid x:Name="topGrid">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="40*"/>
-            <ColumnDefinition Width="60*"/>
+            <ColumnDefinition Width="43*"/>
+            <ColumnDefinition Width="57*"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <Grid.ColumnDefinitions>
@@ -60,7 +60,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Grid.Column="0" Content="屏幕IP地址"/>
-            <TextBox Grid.Row="0" Grid.Column="1" x:Name="ipAddr" InputMethod.IsInputMethodEnabled="False" Style="{StaticResource ValidationTextBoxStyle}" KeyDown="ipAddr_KeyDown">
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="0,2,0,2" VerticalContentAlignment="Center" x:Name="ipAddr" InputMethod.IsInputMethodEnabled="False" Style="{StaticResource ValidationTextBoxStyle}" KeyDown="ipAddr_KeyDown">
                 <TextBox.Text>
                     <Binding Path="IpAddr" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
@@ -72,7 +72,7 @@
             <!--<xctk:MaskedTextBox Grid.Row="0" Grid.Column="1" Name="ipAddr" Mask="999.999.##9.999" Text="192.168.001.183" IncludeLiteralsInValue="True"/>-->
             <Label Grid.Row="1" Grid.Column="0" Content="通信端口"/>
             <!--<TextBox Grid.Row="1" Grid.Column="1" x:Name="ipPort" Text="{Binding Port}"/>-->
-            <TextBox Grid.Row="1" Grid.Column="1" x:Name="ipPort" InputMethod.IsInputMethodEnabled="False" Style="{StaticResource ValidationTextBoxStyle}" KeyDown="ipPort_KeyDown">
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,2,0,2" VerticalContentAlignment="Center" x:Name="ipPort" InputMethod.IsInputMethodEnabled="False" Style="{StaticResource ValidationTextBoxStyle}" KeyDown="ipPort_KeyDown">
                 <TextBox.Text>
                     <Binding Path="Port" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
@@ -83,43 +83,43 @@
             </TextBox>
             <Label Grid.Row="2" Grid.Column="0" Content="屏号"/>
             <!--<dxe:SpinEdit Grid.Row="2" Grid.Column="1" MinValue="1" MaxValue="65535" Increment="1" Value="{Binding Id}"/>-->
-            <xctk:ButtonSpinner Grid.Row="2" Grid.Column="1"  Spin="ButtonSpinner_Spin_Id">
+            <xctk:ButtonSpinner Grid.Row="2" Grid.Column="1" Margin="0,2,0,2" VerticalContentAlignment="Center" Spin="ButtonSpinner_Spin_Id">
                 <TextBlock Text="{Binding Path=Id}" HorizontalAlignment="Right"/>
             </xctk:ButtonSpinner>
             <Label Grid.Row="3" Grid.Column="0" Content="屏幕宽度"/>
             <!--<dxe:SpinEdit Grid.Row="3" Grid.Column="1" MinValue="64" MaxValue="2048" Increment="16" Value="{Binding Width}"/>-->
-            <xctk:ButtonSpinner Grid.Row="3" Grid.Column="1" Spin="ButtonSpinner_Spin_Width">
+            <xctk:ButtonSpinner Grid.Row="3" Grid.Column="1" Margin="0,2,0,2" VerticalContentAlignment="Center" Spin="ButtonSpinner_Spin_Width">
                 <TextBlock Text="{Binding Path=Width}" HorizontalAlignment="Right"/>
             </xctk:ButtonSpinner>
             <Label Grid.Row="4" Grid.Column="0" Content="屏幕高度"/>
             <!--<dxe:SpinEdit Grid.Row="4" Grid.Column="1" MinValue="16" MaxValue="512" Increment="16" Value="{Binding High}"/>-->
-            <xctk:ButtonSpinner Grid.Row="4" Grid.Column="1"  Spin="ButtonSpinner_Spin_High">
+            <xctk:ButtonSpinner Grid.Row="4" Grid.Column="1" Margin="0,2,0,2" VerticalContentAlignment="Center"  Spin="ButtonSpinner_Spin_High">
                 <TextBlock Text="{Binding Path=High}" HorizontalAlignment="Right"/>
             </xctk:ButtonSpinner>
             <Label Grid.Row="5" Grid.Column="0" Content="屏类型"/>
-            <ComboBox Grid.Row="5" Grid.Column="1" SelectedIndex="{Binding Type}">
+            <ComboBox Grid.Row="5" Grid.Column="1" Margin="0,2,0,2" VerticalContentAlignment="Center" SelectedIndex="{Binding Type}">
                 <ComboBoxItem Content="单基色"/>
                 <ComboBoxItem Content="双基色"/>
             </ComboBox>
             <Label Grid.Row="6" Grid.Column="0" Content="数据极性"/>
-            <ComboBox Grid.Row="6" Grid.Column="1" SelectedIndex="{Binding Polarity}">
+            <ComboBox Grid.Row="6" Grid.Column="1" Margin="0,2,0,2" VerticalContentAlignment="Center" SelectedIndex="{Binding Polarity}">
                 <ComboBoxItem Content="负极性"/>
                 <ComboBoxItem Content="正极性"/>
             </ComboBox>
             <Label Grid.Row="7" Grid.Column="0" Content="OE极性"/>
-            <ComboBox Grid.Row="7" Grid.Column="1" SelectedIndex="{Binding ValidType}">
+            <ComboBox Grid.Row="7" Grid.Column="1" Margin="0,2,0,2" VerticalContentAlignment="Center" SelectedIndex="{Binding ValidType}">
                 <ComboBoxItem Content="低有效"/>
                 <ComboBoxItem Content="高有效"/>
             </ComboBox>
             <Label Grid.Row="8" Grid.Column="0" Content="总值班号"/>
-            <TextBox Grid.Row="8" Grid.Column="1" x:Name="dutyNo" Text="{Binding DutyNo}"/>
+            <TextBox Grid.Row="8" Grid.Column="1" Margin="0,2,0,2" VerticalContentAlignment="Center" x:Name="dutyNo" Text="{Binding DutyNo}"/>
             <Label Grid.Row="9" Grid.Column="0" Content="值班更新时间"/>
-            <xctk:DateTimeUpDown Name="timeCtrl" Grid.Row="9" Grid.Column="1" AllowTextInput="False" Text="{Binding UpdateTime, Mode=OneTime}" ValueChanged="timeCtrl_ValueChanged" Format="Custom" FormatString="hh:mm:ss" />
+            <xctk:DateTimeUpDown Name="timeCtrl" Grid.Row="9" Grid.Column="1" Margin="0,2,0,2" VerticalContentAlignment="Center"  AllowTextInput="False" Text="{Binding UpdateTime, Mode=OneTime}" ValueChanged="timeCtrl_ValueChanged" Format="Custom" FormatString="hh:mm:ss" />
             <!--<xctk:DateTimeUpDown Grid.Row="9" Grid.Column="1" Value="12:30:00" Format="Custom" FormatString="hh:mm:tt" />-->
             <Label Grid.Row="10" Grid.Column="0" Content="通知翻屏（秒）"/>
-            <TextBox Grid.Row="10" Grid.Column="1" x:Name="convertTime" Text="{Binding NotifyTime}" InputMethod.IsInputMethodEnabled="False" KeyDown="convertTime_KeyDown"/>
+            <TextBox Grid.Row="10" Grid.Column="1" Margin="0,2,0,2" VerticalContentAlignment="Center" x:Name="convertTime" Text="{Binding NotifyTime}" InputMethod.IsInputMethodEnabled="False" KeyDown="convertTime_KeyDown"/>
         </Grid>
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" Margin="20,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30*"/>
                 <RowDefinition Height="70*"/>
@@ -135,14 +135,14 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Grid.Column="0" Content="主界面左标题"/>
-                <TextBox Grid.Row="0" Grid.Column="1" x:Name="leftTitle" Text="{Binding LeftTitle}"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="0,2,0,2" VerticalContentAlignment="Center" x:Name="leftTitle" Text="{Binding LeftTitle}"/>
                 <Label Grid.Row="1" Grid.Column="0" Content="主界面右标题"/>
-                <TextBox Grid.Row="1" Grid.Column="1" x:Name="rightTitle" Text="{Binding RightTitle}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="0,2,0,2" VerticalContentAlignment="Center" x:Name="rightTitle" Text="{Binding RightTitle}"/>
                 <Label Grid.Row="2" Grid.Column="0" Content="屏幕监控群"/>
-                <ComboBox Grid.Row="2" Grid.Column="1" x:Name="groupComboBox" DisplayMemberPath="GroupName" SelectedValuePath="AuthId" SelectedValue="{Binding GroupId}"/>
+                <ComboBox Grid.Row="2" Grid.Column="1" Margin="0,2,0,2" VerticalContentAlignment="Center" x:Name="groupComboBox" DisplayMemberPath="GroupName" SelectedValuePath="AuthId" SelectedValue="{Binding GroupId}"/>
             </Grid>
             <GroupBox Grid.Row="1" Header="通知信息">
-                <TextBox TextWrapping="Wrap" AcceptsReturn="True"  x:Name="noteText" Text="{Binding NoteText}"/>
+                <TextBox TextWrapping="Wrap" AcceptsReturn="True" x:Name="noteText" Text="{Binding NoteText}"/>
             </GroupBox>
         </Grid>
     </Grid>

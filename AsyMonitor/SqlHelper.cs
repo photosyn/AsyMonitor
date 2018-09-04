@@ -11,6 +11,9 @@ namespace AsyMonitor
         private static string _connStr = "data source=.;initial catalog=snwzhykt;user id=sa;pwd=123456;Connection Timeout=15;MultipleActiveResultSets=true";//
         //private static string _connStr = "data source=192.168.1.183;initial catalog=SDNX;user id=sa;pwd=123456;Connection Timeout=15;MultipleActiveResultSets=true";
         private static SqlConnection _conn;
+        private static bool _connected = false;
+
+        public static bool Connected { get => _connected; set => _connected = value; }
 
         public static bool Init()
         {
@@ -19,24 +22,43 @@ namespace AsyMonitor
             string source = IniFile.INIGetStringValue(iniFileName, "SYSCONFIG", "SQLServer", "");
             string user = IniFile.INIGetStringValue(iniFileName, "SYSCONFIG", "SQLSysUser", "");
             string pwd = IniFile.INIGetStringValue(iniFileName, "SYSCONFIG", "SQLSysPassword", "");
-            _connStr = String.Format("data source={0};initial catalog={1};user id={2};pwd={3};Connection Timeout=15;MultipleActiveResultSets=true", source, catalog, user, pwd);
+            return Connect(catalog, source, user, pwd);
+        }
+
+        public static bool Connect(string catalog, string source, string user, string pwd)
+        {
+            _connStr = String.Format("data source={0};initial catalog={1};user id={2};pwd={3};Connection Timeout=5;MultipleActiveResultSets=true", source, catalog, user, pwd);
+            if (Connected)
+            {
+                Close();
+            }
             _conn = new SqlConnection(_connStr);
             try
             {
                 _conn.Open();
-                return true;
+                Connected = true;
             }
             catch (SqlException e)
             {
                 MessageBox.Show(e.Message);
-                return false;
+                Connected = false;
             }
             catch (Exception e)
             {
                 //记录日志，退出
                 MessageBox.Show(e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
+                Connected = false;
             }
+            return Connected;
+        }
+
+        public static bool Close()
+        {
+            _conn.Close();
+            _conn.Dispose();
+            Connected = false;
+
+            return true;
         }
 
         //只用来执行查询结果比较小的sql

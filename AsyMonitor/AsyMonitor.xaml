@@ -7,7 +7,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         x:Class="AsyMonitor.MainWindow"
         mc:Ignorable="d"
-        Title="AsyMonitor" Icon="icons/左上角.png" Height="678" Width="1171" Closing="Window_Close" Loaded="Window_Loaded">
+        Title="区域人员统计系统" Icon="icons/左上角.png" Height="678" Width="1171" Closing="Window_Close" Loaded="Window_Loaded">
 
     <Window.Resources>
         <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>

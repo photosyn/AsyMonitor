@@ -67,6 +67,9 @@
     </ApplicationDefinition>
     <Compile Include="BxDriver.cs" />
     <Compile Include="CardTypeToBoolConverter.cs" />
+    <Compile Include="DatabaseSetting.xaml.cs">
+      <DependentUpon>DatabaseSetting.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Device.cs" />
     <Compile Include="FontSettings.xaml.cs">
       <DependentUpon>FontSettings.xaml</DependentUpon>
@@ -74,6 +77,9 @@
     <Compile Include="Group.cs" />
     <Compile Include="IniFile.cs" />
     <Compile Include="IPAddressRule.cs" />
+    <Compile Include="Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MyGroupList.xaml.cs">
       <DependentUpon>MyGroupList.xaml</DependentUpon>
     </Compile>
@@ -102,7 +108,15 @@
       <DependentUpon>AsyMonitor.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="DatabaseSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="FontSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -155,6 +169,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icons\左上角3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="View\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
