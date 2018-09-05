@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AsyMonitor"
         mc:Ignorable="d"
-        Title="字体设置" Icon="icons/左上角3.png" Height="400" Width="640" WindowStartupLocation="CenterScreen">
+        Title="字体设置" Icon="/icons/左上角3.png" Height="400" Width="640" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="90*"/>

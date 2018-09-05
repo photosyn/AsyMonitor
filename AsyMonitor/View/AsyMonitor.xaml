@@ -7,7 +7,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         x:Class="AsyMonitor.MainWindow"
         mc:Ignorable="d"
-        Title="区域人员统计系统" Icon="icons/左上角.png" Height="678" Width="1171" Closing="Window_Close" Loaded="Window_Loaded">
+        Title="区域人员统计系统" Icon="/icons/左上角.png" Height="678" Width="1171" Closing="Window_Close" Loaded="Window_Loaded">
 
     <Window.Resources>
         <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
@@ -141,22 +141,22 @@
             </Grid>
             <xctk:IconButton Grid.Column="1" Background="Black" Foreground="Red" Content="下载屏幕参数" FontSize="20" BorderThickness="0" HorizontalAlignment="Stretch" Click="Button_Download_Click">
                 <xctk:IconButton.Icon>
-                    <Image Source="icons/下载.png"  Margin="0,0,8,0"/>
+                    <Image Source="/icons/下载.png"  Margin="0,0,8,0"/>
                 </xctk:IconButton.Icon>
             </xctk:IconButton>
             <xctk:IconButton Grid.Column="2" Background="Black" Foreground="Red" Content="参数设置" FontSize="20" BorderThickness="0" HorizontalAlignment="Stretch" Click="Button_Settings_Click">
                 <xctk:IconButton.Icon>
-                    <Image Source="icons/设置.png"  Margin="0,0,8,0"/>
+                    <Image Source="/icons/设置.png"  Margin="0,0,8,0"/>
                 </xctk:IconButton.Icon>
             </xctk:IconButton>
             <xctk:IconButton Grid.Column="3" Background="Black" Foreground="Red" Content="字体设置" FontSize="20" BorderThickness="0" HorizontalAlignment="Stretch" Click="Button_Font_Click">
                 <xctk:IconButton.Icon>
-                    <Image Source="icons/字体.png"  Margin="0,0,8,0"/>
+                    <Image Source="/icons/字体.png"  Margin="0,0,8,0"/>
                 </xctk:IconButton.Icon>
             </xctk:IconButton>
             <xctk:IconButton Grid.Column="4" Background="Black" Foreground="Red" Content="退出" FontSize="20" BorderThickness="0" HorizontalAlignment="Stretch" Click="Button_Exit_Click">
                 <xctk:IconButton.Icon>
-                    <Image Source="icons/退出.png" Margin="0,0,8,0"/>
+                    <Image Source="/icons/退出.png" Margin="0,0,8,0"/>
                 </xctk:IconButton.Icon>
             </xctk:IconButton>
         </Grid>

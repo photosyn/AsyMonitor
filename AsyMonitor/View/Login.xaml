@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AsyMonitor"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="登录" Icon="icons/左上角.png" Height="250" Width="360" WindowStartupLocation="CenterScreen">
+        Title="登录" Icon="/icons/左上角.png" Height="250" Width="360" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>

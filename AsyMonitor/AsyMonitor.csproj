@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>程序图标.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -66,37 +69,37 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BxDriver.cs" />
-    <Compile Include="CardTypeToBoolConverter.cs" />
-    <Compile Include="DatabaseSetting.xaml.cs">
+    <Compile Include="Convertor\CardTypeToBoolConverter.cs" />
+    <Compile Include="View\DatabaseSetting.xaml.cs">
       <DependentUpon>DatabaseSetting.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Device.cs" />
-    <Compile Include="FontSettings.xaml.cs">
+    <Compile Include="Model\Device.cs" />
+    <Compile Include="View\FontSettings.xaml.cs">
       <DependentUpon>FontSettings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Group.cs" />
+    <Compile Include="Model\Group.cs" />
     <Compile Include="IniFile.cs" />
     <Compile Include="IPAddressRule.cs" />
-    <Compile Include="Login.xaml.cs">
+    <Compile Include="View\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MyGroupList.xaml.cs">
+    <Compile Include="View\MyGroupList.xaml.cs">
       <DependentUpon>MyGroupList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MyScreenParam.xaml.cs">
+    <Compile Include="View\MyScreenParam.xaml.cs">
       <DependentUpon>MyScreenParam.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Role.cs" />
-    <Compile Include="ScreenParam.cs" />
-    <Compile Include="ScreenParamReader.cs" />
-    <Compile Include="Settings.xaml.cs">
+    <Compile Include="Model\Role.cs" />
+    <Compile Include="Model\ScreenParam.cs" />
+    <Compile Include="Model\ScreenParamReader.cs" />
+    <Compile Include="View\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="SqlHelper.cs" />
-    <Compile Include="ArgbToColorConverter.cs" />
-    <Compile Include="StringToFontFamilyConverter.cs" />
-    <Compile Include="TreeNode.cs" />
-    <Page Include="AsyMonitor.xaml">
+    <Compile Include="Convertor\ArgbToColorConverter.cs" />
+    <Compile Include="Convertor\StringToFontFamilyConverter.cs" />
+    <Compile Include="Model\TreeNode.cs" />
+    <Page Include="View\AsyMonitor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -104,31 +107,31 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="AsyMonitor.xaml.cs">
+    <Compile Include="View\AsyMonitor.xaml.cs">
       <DependentUpon>AsyMonitor.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="DatabaseSetting.xaml">
+    <Page Include="View\DatabaseSetting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FontSettings.xaml">
+    <Page Include="View\FontSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Login.xaml">
+    <Page Include="View\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MyGroupList.xaml">
+    <Page Include="View\MyGroupList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MyScreenParam.xaml">
+    <Page Include="View\MyScreenParam.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Settings.xaml">
+    <Page Include="View\Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -171,7 +174,7 @@
     <Resource Include="icons\左上角3.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="View\" />
+    <Resource Include="程序图标.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
